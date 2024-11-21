@@ -2,6 +2,17 @@ tasks:
   - name: utils
     before:
       sudo apt-get install tree
+  - name: powershell
+    before:
+      sudo apt-get update
+      sudo apt-get install -y wget apt-transport-https software-properties-common
+      wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+      sudo dpkg -i packages-microsoft-prod.deb
+      sudo add-apt-repository ppa:jonathonf/powershell
+      sudo apt-get update
+      sudo apt-get install -y powershell
+      # pwsh
+      # Install-Module -Name AWS.Tools.Installer
   - name : aws-cli
     env:
       AWS_CLI_AUTO_PROMPT: on-partial
