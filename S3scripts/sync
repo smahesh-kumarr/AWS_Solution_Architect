@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+echo "=====Sync workflow"
+OUTPUT_DIR="/tmp/S3scripts"
+
+
+# check for bucket Name
+if [ -z "$1" ]; then
+    echo "Give the proper input name for bucket"
+    exit 1
+fi
+
+#check for file name
+if [ -z "$2" ]; then
+    echo "Invalid file input name"
+    exit 1
+fi
+
+# Assign the bucket name to a variable
+Bucket_Name=$1
+FILENAME_PREFIX=$2
+
+# Remove the directory if it already exists and create it again
+rm -rf "$OUTPUT_DIR"
+mkdir -p "$OUTPUT_DIR"
+
+# Generate a random number of files between 5 and 10
+NUM_FILES=$((RANDOM % 6 + 5))
+
+# Create files with random content
+for ((i=1; i<=$NUM_FILES; i++)); do
+    FILENAME="$OUTPUT_DIR/${FILENAME_PREFIX}_$i.txt"
+    
+    # Use dd to create a file with random data
+    dd if=/dev/urandom of="$FILENAME" bs=1024 count=$((RANDOM % 1024 + 1)) 2>/dev/null
+done
+
+# Display the directory structure
+tree "$OUTPUT_DIR"
+
+aws s3 sync $OUTPUT_DIR s3://$Bucket_Name/files

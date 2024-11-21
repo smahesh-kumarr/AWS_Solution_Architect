@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+echo "=====delete-objects-------"
+
+
+
+# check for bucket Name
+if [ -z "$1" ]; then
+    echo "Give the proper input name for bucket"
+    exit 1
+fi
+
+#check for file name
+
+
+Bucket_Name=$1
+
+aws s3api list-objects-v2 \
+    --bucket "$Bucket_Name" \
+    --query "Contents[].Key" \
+    --output text \
+| tr '\t' '\n' \
+| jq -R . \
+| jq -s '{Objects: map({Key: .})}' > /tmp/deleteobject.json
+
+aws s3api delete-objects --bucket "$Bucket_Name" --delete file:///tmp/deleteobject.json

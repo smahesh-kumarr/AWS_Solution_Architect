@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+echo "=====put-objects-------"
+
+# check for bucket Name
+if [ -z "$1" ]; then
+    echo "Give the proper input name for bucket"
+    exit 1
+fi
+
+#check for file name
+if [ -z "$2" ]; then
+    echo "Invalid file input name"
+    exit 1
+fi
+
+Bucket_Name=$1
+FILENAME=$2
+
+object_Key=$(basename "$FILENAME")
+
+aws s3api put-object \
+--bucket $Bucket_Name \
+--body $FILENAME \
+--key $object_Key
+
