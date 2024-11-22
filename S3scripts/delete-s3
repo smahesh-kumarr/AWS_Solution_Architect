@@ -1,16 +1,15 @@
-
 #!/usr/bin/env bash
 
 # Check if the argument is provided
 if [ -z "$1" ]; then
     echo "Give the proper input name"
     exit 1
-fi
 
+fi
 # Assign the bucket name to a variable
 Bucket_Name=$1
 
 # Create the S3 bucket
 aws s3api delete-bucket --bucket "$Bucket_Name" \
---query location \
---output text
+# --query location \
+# --output text
