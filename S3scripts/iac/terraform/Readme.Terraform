@@ -1,0 +1,9 @@
+Gitpod Workspace Setup: Initialize AWS CLI and Terraform.
+Terraform Configuration Files:
+main.tf: Defines AWS provider and region.
+s3.tf: Defines the S3 bucket resource.
+Initialize Terraform: Run terraform init to initialize the Terraform working directory.
+Configure AWS CLI: Set AWS credentials using aws configure or environment variables.
+Apply the Terraform Configuration: Run terraform apply to create the S3 bucket.
+Verify: Check AWS for the newly created S3 bucket.
+Cleanup: Use terraform destroy to delete resources.
