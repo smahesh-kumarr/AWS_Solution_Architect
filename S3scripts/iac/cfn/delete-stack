@@ -2,8 +2,7 @@
 
 echo "Delete the stack"
 
-STACK_NAME="cfn-s3-simple-practice456789"
+STACK_NAME=$1
 
 aws cloudformation delete-stack \
     --stack-name "$STACK_NAME" \
-    --region "us-west-2"
