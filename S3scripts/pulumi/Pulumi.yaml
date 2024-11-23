@@ -1,5 +1,5 @@
-name: s3-simple-sdk
-description: A python for creating a simple s3
+name: s3-project-creation
+description: aws  project creation
 runtime:
   name: python
   options:
