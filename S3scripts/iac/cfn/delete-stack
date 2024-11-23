@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+echo "Delete the stack"
+
+STACK_NAME="cfn-s3-simple-practice456789"
+
+aws cloudformation delete-stack \
+    --stack-name "$STACK_NAME" \
+    --region "us-west-2"

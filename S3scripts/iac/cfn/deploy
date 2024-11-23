@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+echo "== Deploying S3 bucket via CloudFormation =="
+
+# Define the stack name
+STACK_NAME="cfn-s3-simple-practice456789"
+
+# Deploy the CloudFormation stack
+aws cloudformation deploy \
+    --template-file /workspace/AWS_Solution_Architect/S3scripts/iac/cfn/template.yaml \
+    --no-execute-changeset \
+    --region us-west-2 \
+    --stack-name "$STACK_NAME"
