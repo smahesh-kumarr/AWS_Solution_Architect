@@ -1,0 +1,60 @@
+GET, PUT, DELETE Operations: Designed for High Availability
+These operations are the most common and are optimized for high availability because they are essential for frequent and scalable data interaction:
+
+GET:
+
+Used to read data from S3.
+Designed to handle high request rates and offer low-latency responses.
+Can scale horizontally to support millions of requests per second.
+PUT:
+
+Used to upload data to S3.
+Optimized to handle a high volume of concurrent writes.
+DELETE:
+
+Used to remove objects from S3.
+Also highly available but note that deletions are typically "eventual" in the sense that deleted objects might remain retrievable for a short period due to the distributed nature of S3.
+CREATE, DELETE, or CONFIG Operations: Run Less Often
+Operations like bucket creation, bucket deletion, or configuration updates (e.g., setting policies, lifecycle rules) are considered control-plane operations, designed to be executed less frequently:
+
+Bucket Creation and Deletion:
+
+These operations involve changes to the S3 control plane, which manages metadata for your buckets.
+Bucket creation is typically done once and does not need frequent repetition.
+Deletion is a rare event since it involves cleaning up all objects within the bucket.
+Configuration Operations:
+
+Examples include setting bucket policies, enabling versioning, or configuring lifecycle rules.
+These are infrequent because such configurations usually remain stable for long periods.
+Reasons for Limited Frequency:
+
+These operations involve updates to the metadata layer, which is separate from the data storage layer in S3.
+Frequent updates to configurations could introduce overhead and might temporarily affect the performance of other operations.
+
+=========================================================================
+S3 Bucket Types 
+
+Feature	General Purpose Buckets	Directory Buckets
+Structure	Flat key-value storage.	Hierarchical key naming for a directory-like structure.
+Key Names	Simple, arbitrary names (e.g., file.txt).	Use prefixes to simulate folders (e.g., folder/file.txt).
+Visualization	Managed as a flat list of objects.	Can appear as folders in tools like the AWS Management Console.
+Use Case	Broad, flexible use for any type of data storage.	Specific use cases where data needs logical organization.
+
+General Purpose Bucket:
+Object Keys:
+image1.png
+image2.png
+video.mp4
+Directory Bucket:
+Object Keys (with prefixes):
+images/photo1.png
+images/photo2.png
+videos/video1.mp4
+
+What is a Prefix in S3?
+A prefix in Amazon S3 is the part of an object key that comes before a / or another separator used in hierarchical key names.
+For example, in the object key logs/2024/january/log1.txt:
+The prefix is logs/2024/january/.
+Prefix Limit
+S3 scales based on prefixes, which impact the performance of listing and retrieving objects.
+AWS S3 can process 3,500 PUT/POST/DELETE requests per second per prefix and 5,500 GET requests per second per prefix. These limits apply to each prefix, so designing your bucket with multiple prefixes can improve performance.
