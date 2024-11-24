@@ -1,0 +1,4 @@
+Hello Bro
+I'm exprementing e-tags
+
+//aws s3 cp s3://terraform-20241124160058853400000001/myfile.txt - && cat -
