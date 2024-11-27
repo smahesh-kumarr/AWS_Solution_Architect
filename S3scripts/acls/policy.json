@@ -1,0 +1,19 @@
+{
+    "Grants": [
+      {
+        "Grantee": {
+          "DisplayName": "",
+          "EmailAddress": "maheshkumar",
+          "ID": "234567887654",
+          "Type": "CanonicalUser",
+          "URI": "frvnk234567"
+        },
+        "Permission": "FULL_CONTROL"|"WRITE"|"WRITE_ACP"|"READ"|"READ_ACP"
+      }
+      ...
+    ],
+    "Owner": {
+      "DisplayName": "mahesh2",
+      "ID": "213456789890"
+    }
+  }
