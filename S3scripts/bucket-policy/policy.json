@@ -1,20 +1,19 @@
 {
-    "Statement":[
+   "Statement": [
        {
-          "Effect":"Allow",
-          "Principal":{
-             "AWS":"arn:aws:iam::111122223333:role/JohnDoe"
-          },
-          
-          "Action":[
-             "s3:GetObject",
-             "s3:ListBucket",
-             "s3:PutObject"
-          ],
-          "Resource":[
-            "arn:aws:s3:::bucket-policy-234532334"
-            "arn:aws:s3:::bucket-policy-234532334/*",
-          ]
+           "Effect": "Allow",
+           "Principal": {
+               "AWS": "arn:aws:iam::949593608123:user/aws_example_user_2"
+           },
+           "Action": [
+               "s3:GetObject",
+               "s3:ListBucket",
+               "s3:PutObject"
+           ],
+           "Resource": [
+               "arn:aws:s3:::bucket-policy-234532334",
+               "arn:aws:s3:::bucket-policy-234532334/*"
+           ]
        }
-    ]
- }
+   ]
+}
