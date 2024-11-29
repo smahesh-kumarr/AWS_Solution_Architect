@@ -24,7 +24,9 @@ aws s3 cp index.html s3://fun-ab-2345678
 
 
 ## View index.html file 
-https://fun-ab-2345678.s3-website-us-east-1.amazonaws.com
+https://fun-ab-2345678.s3-website-us-east-1.amaz
+
+
 
 ## Create a website2
 
@@ -52,3 +54,4 @@ aws s3api put-bucket-website --bucket fun-ab-2345679 --website-configuration fil
 ## Upload to s3 
 aws s3 cp index.html s3://fun-ab-2345679
 
+Bending .......................
