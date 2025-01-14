@@ -132,4 +132,29 @@ Advantages :
  3.Edit the route table it may implicitly made
  4.If we need we make it as Explicitly associate the subnet in a route Table
  5.Create the Internet Gateway attach to the Vpc
- 
+
+ ======================================================================================================================
+
+How RAM Works in the Context of VPC:
+
+When used with VPC (Virtual Private Cloud), AWS RAM allows you to share specific VPC resources
+between multiple AWS accounts or VPCs. This can be particularly useful in multi-account environments, 
+where resources like subnets, route tables, and security groups need to be shared between accounts or
+different VPCs in the same region.
+
+Steps to Share VPC Resources Using AWS RAM:
+Create a Resource Share:
+
+In the AWS RAM console, create a new resource share and specify which resources (such as subnets, VPC peering connections, or Transit Gateways) you want to share.
+Choose Principals:
+
+Select the AWS accounts, organizational units, or the entire organization that should have access to the shared resources.
+Accept the Resource Share:
+
+The recipient accounts must accept the shared resources in their AWS RAM console before they can use them.
+Manage Permissions:
+
+You can manage and control the permissions on the shared resources to ensure that recipients only have access to the required resources and actions.
+
+=========================================================================================================================
+
