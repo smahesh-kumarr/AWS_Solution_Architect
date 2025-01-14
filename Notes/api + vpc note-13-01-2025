@@ -1,0 +1,135 @@
+AWS CLI 
+
+API Retries
+Retries involve automatically resending a request that has failed due to transient errors. This increases the chances
+ of the request succeeding without manual intervention.
+
+Backoffs
+Backoff is the strategy of waiting for a certain amount of time before retrying a failed request. This helps prevent
+ overwhelming the service with repeated requests in a short time.
+
+
+commands:
+aws configure set retry_mode standard  # Default retry mode
+aws configure set max_attempts 5  
+
+
+ Security Token Service 
+
+AWS Security Token Service (STS) is a web service that allows you to request temporary, limited-privilege credentials 
+for AWS Identity and Access Management (IAM) users or federated users. These credentials are used to access AWS resources
+ and are particularly useful for providing secure, temporary access to your AWS environment.
+
+aws sts assume-role --role-arn "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME" --role-session-name "session-name"
+
+======================================================================================================================
+
+Signing aws api requests
+
+What Does "AWS Signing API Request" Mean?
+When interacting with AWS services using APIs, signing an API request refers to adding a digital signature to the request. 
+This signature is created using your AWS access key and secret key. It ensures that AWS can authenticate who you are and 
+verifies that your request has not been tampered with during transmission.
+
+Why Does Signing Play a Role?
+Signing API requests is important for security and authentication. When your application interacts with AWS (such as uploading 
+a file to S3 or starting an EC2 instance), AWS needs to know:
+
+Who is making the request – so it can check permissions and allow or deny access.
+That the request data has not been changed – ensuring data integrity.
+That it was sent within an acceptable timeframe – to prevent replay attacks (an attacker resending the same request).
+
+
+======================================================================================================================
+
+Request Type: Refers to how you send the request. It can be in:
+
+Header: Signature information is included in the request header.
+
+Query Parameter: Signature information is appended to the URL as query parameters.
+
+String to Sign: A string representing the request’s important information (HTTP method, headers, payload, etc.) 
+that will be hashed and signed.
+
+Signing Key: A derived key based on your AWS secret access key, date, region, and service.
+Signature: The final cryptographic value, which ensures the integrity and authenticity of the request.
+
+
+Header	Signature information is included in the Authorization header.
+Query Parameter	Signature information is appended to the URL as query string parameters (X-Amz-*).
+
+
+=====================================================================================================================
+
+A Service Endpoint in AWS is a URL that acts as an entry point to communicate with a specific AWS service over the internet 
+or within a Virtual Private Cloud (VPC). Each AWS service provides one or more service endpoints in each region. The endpoint 
+allows your application to connect to AWS services.
+
+
+Connectivity: Endpoints allow your applications to communicate with AWS services.
+
+Security: By using VPC endpoints, you avoid sending traffic over the public internet, enhancing security.
+
+Performance: Using region-specific endpoints optimizes the speed of service interactions.
+
+
+=====================================================================================================================
+
+When to Use --cli-input-json or --cli-input-yaml
+Use these flags when working with commands that require multiple or complex parameters.
+They help keep your command-line scripts clean and easier to maintain by separating the configuration from the command.
+
+aws s3api create-bucket --cli-input-json file://s3-create-bucket.json
+aws ec2 run-instances --cli-input-yaml file://create-ec2-instance.yaml
+
+
+======================================================================================================================
+
+Percendence:
+
+Automatic Authentication:
+AWS CLI automatically looks for credentials in the following order of precedence:
+
+Command-line options (e.g., --region or --profile).
+Environment variables (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY).
+The AWS credentials file (~/.aws/credentials).
+IAM role credentials for Amazon EC2.
+
+Environment Variable
+======================================================================================================================
+temporary Stored :
+
+export AWS_ACCESS_KEY_ID=YOUR_ACCESS_KEY
+export AWS_SECRET_ACCESS_KEY=YOUR_SECRET_KEY
+export AWS_DEFAULT_REGION=us-east-1
+
+Permanent Stored:
+
+echo 'export AWS_ACCESS_KEY_ID=YOUR_ACCESS_KEY' >> ~/.bashrc
+echo 'export AWS_SECRET_ACCESS_KEY=YOUR_SECRET_KEY' >> ~/.bashrc
+echo 'export AWS_DEFAULT_REGION=us-east-1' >> ~/.bashrc
+source ~/.bashrc
+
+
+Advantages :
+
+1.Avoid Hardcoding Credentials: Never hardcode credentials directly into source code.
+
+2.Use IAM Roles: Prefer IAM roles for AWS services like EC2 and Lambda instead of long-term access keys.
+
+3.Rotate Access Keys Regularly: Update your environment variables when keys are rotated.
+
+4.Use AWS Vault or Credential Providers: Tools like AWS Vault securely store and manage
+ credentials outside environment variables.
+
+
+ ======================================================================================================================
+
+ VPC => Virtual Private Cloud 
+
+ 1.Create a Vpc
+ 2.Create a Subnet with a proper CIDR Block
+ 3.Edit the route table it may implicitly made
+ 4.If we need we make it as Explicitly associate the subnet in a route Table
+ 5.Create the Internet Gateway attach to the Vpc
+ 
