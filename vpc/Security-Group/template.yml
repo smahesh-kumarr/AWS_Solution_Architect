@@ -1,0 +1,71 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template to create an EC2 instance inside a specific VPC and Subnet for SGS toturial.
+
+Parameters:
+  ImageId:
+    Type: String
+    Default: ami-04479848f66ed1eb4
+    Description: The ID of the Amazon Linux 2 AMI to use.
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    Description: EC2 instance type.
+  VPCId:
+    Type: String
+    Default: vpc-044d2a6f03d126f53
+    Description: The VPC ID where the instance will be launched.
+  SubnetId:
+    Type: String
+    Default: subnet-02c7e8e40cb84a2f1
+    Description: The Subnet ID where the instance will be launched.
+
+Resources:
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH access
+      VpcId: !Ref VPCId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          FromPort: -1
+          ToPort: -1
+          CidrIp: 0.0.0.0/0
+
+  SSMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ["ec2.amazonaws.com"]
+            Action: "sts:AssumeRole"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+
+  EC2InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref SSMRole
+
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref ImageId
+      InstanceType: !Ref InstanceType
+      SubnetId: !Ref SubnetId
+      SecurityGroupIds:
+        - !Ref SecurityGroup
+      IamInstanceProfile: !Ref EC2InstanceProfile
+
+Outputs:
+  InstanceId:
+    Description: The ID of the created EC2 instance.
+    Value: !Ref MyEC2Instance

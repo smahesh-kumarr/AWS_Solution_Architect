@@ -1,0 +1,48 @@
+# Security Groups - Mini Notes
+
+This repository contains summarized notes on AWS Security Groups with real-world examples to help understand different use cases.
+
+## Use Cases
+
+### 1. Allow Specific IP Addresses
+You can allow traffic from a specific IP or range using CIDR notation.
+
+**Example**:
+- Allow a single IP: `192.168.1.100/32`.
+- Allow a subnet range: `192.168.1.0/24`.
+
+### 2. Allow Traffic Between Security Groups
+Security Groups can allow traffic between instances by referencing another Security Group as the source.
+
+**Example**:
+- Web servers in `sg-web-app` can connect to database servers in `sg-db` on port 3306 (MySQL).
+
+### 3. Using Multiple Security Groups (Permissive Nature)
+An instance can belong to multiple Security Groups. Rules are cumulative and permissive, meaning any rule that allows traffic will enable it unless explicitly denied.
+
+**Example**:
+- `sg-web` allows HTTP/HTTPS traffic from anywhere (`0.0.0.0/0`).
+- `sg-admin` allows SSH only from a specific IP (`192.168.1.100/32`).
+- Both Security Groups combined allow public web access and restricted SSH.
+
+## Notes
+- Security Groups are stateful: return traffic is automatically allowed.
+- Security Groups do not support explicit deny rules, unlike Network ACLs.
+
+---
+
+Feel free to use and modify these notes as needed for your projects!
+
+
+
+### 
+- You can have up to 10,000 Security Groups in a Region (default is 2,500)
+- You can have 60 inbound rules and 60 outbound rules per security group
+- 16 Security Groups per Elastic Network Interface (ENI) (default is 5)
+
+- Security groups do not filter traffic destined to and from the following:
+- Amazon Domain Name Services (DNS)
+- Amazon Dynamic Host Configuration Protocol (DHCP)
+- Amazon EC2 instance metadata
+- Amazon ECS task metadata endpoints
+- License activation for Windows instances
