@@ -1,0 +1,35 @@
+What is DNS64?
+DNS64 is like a translator for your internet address book (DNS). When your IPv6-only device asks for the address of a website or service that only has an IPv4 address, DNS64 "translates" that IPv4 address into an IPv6 address so your device can understand and communicate with it.
+
+What is NAT64?
+NAT64 is like a bridge that allows your IPv6-only devices to talk to IPv4-only devices or services. It takes the IPv6 traffic from your device, converts it into IPv4 traffic, and sends it to the IPv4 service. When the IPv4 service responds, NAT64 converts the response back into IPv6 so your device can understand it.
+
+Example:
+Imagine you have an IPv6-only smartphone (let's call it Phone6) and you want to visit a website that only supports IPv4 (let's call it Website4).
+
+Step 1: DNS64 Translation
+
+Phone6 asks, "What is the address of Website4?"
+
+Normally, Website4 only has an IPv4 address, so Phone6 wouldn't understand it.
+
+DNS64 steps in and says, "Here’s an IPv6 version of Website4's address!" Now Phone6 can understand it.
+
+Step 2: NAT64 Communication
+
+Phone6 sends a request to the IPv6 address provided by DNS64.
+
+NAT64 takes that IPv6 request, converts it into an IPv4 request, and sends it to Website4.
+
+When Website4 responds, NAT64 converts the IPv4 response back into IPv6 and sends it to Phone6.
+
+Why is this important?
+Without DNS64 and NAT64, your IPv6-only devices wouldn’t be able to communicate with IPv4-only services, which are still very common on the internet.
+
+Together, DNS64 and NAT64 act as a team to make sure your IPv6-only devices can access the entire internet, even if some parts of it are still using IPv4.
+
+Summary:
+DNS64: Translates IPv4 addresses into IPv6 addresses so your IPv6-only devices can understand them.
+
+NAT64: Converts IPv6 traffic into IPv4 traffic (and vice versa) so your IPv6-only devices can communicate with IPv4-only services.
+==================================================================================================================================
