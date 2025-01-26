@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+yq -o json policy.yml > policy.json
+
+
+aws iam create-policy-version \
+--policy-arn arn:aws:iam::123456789012:policy/my-policy \
+--policy-document file://policy.json \
+--set-as-default
+
+aws iam attach-user-policy \
+--policy-arn arn:aws:iam::aws:my-policy \
+--user-name mahesh-kumarr
