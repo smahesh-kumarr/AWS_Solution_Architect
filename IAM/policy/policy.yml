@@ -2,5 +2,5 @@ Version: "2012-10-17"
 Statement:
   - Sid: "AccessToS3"
     Effect: "Allow"
-    Action: "s3:*"
-    Resource: "s3:*"
+    Action: "s3:ListBucket"
+    Resource: "arn:aws:s3:::mycoolbucket-ab-1412"
