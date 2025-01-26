@@ -1,0 +1,18 @@
+## Create a IAM access Keys
+aws iam create-access-key --user-name aws-examples
+
+
+## Delete a IAM access Keys
+aws iam delete-access-key --user-name aws-examples --access-key-id {$ID}
+
+## MultiFactor Autendication 
+
+Second Device needed to enable
+
+==========================================================================
+
+## Create a Sts access by cross account
+
+```sh
+aws sts get-caller-identity --region us-east-1 --endpoint-url https://sts.us-east-2.amazon.com
+```
