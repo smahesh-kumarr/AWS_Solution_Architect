@@ -1,5 +1,9 @@
 {
-    "Bucket":"salesoffice.example.com-public-promos",
-    "Permissions":[{ }], 
+    "Bucket":"videos.example23456789.com",
+    "Permissions":[{
+        "GranteeType": "Canonical",
+        "Grantee": "AllUsers",
+        "Access": "FullControl"
+    }], 
     "StorageClass":"Standard"
 }
