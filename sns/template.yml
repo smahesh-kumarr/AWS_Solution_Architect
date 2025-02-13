@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  # Create SNS Topic
+  MySNSTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      DisplayName: "MyTopic"
+
+  # Create Lambda Function
+  MyLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: "SNSLambdaHandler"
+      Handler: index.lambda_handler
+      Runtime: python3.12
+      CodeUri: ./lambda/
+      MemorySize: 128
+      Timeout: 5
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - SNSPublishPolicy:
+            TopicName: !GetAtt MySNSTopic.TopicName
+      Events:
+        SNSEvent:
+          Type: SNS
+          Properties:
+            Topic: !Ref MySNSTopic
+
+  # SNS Subscription
+  MySNSSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      Protocol: lambda
+      Endpoint: !GetAtt MyLambdaFunction.Arn
+      TopicArn: !Ref MySNSTopic
+
+Outputs:
+  SNSTopicARN:
+    Value: !Ref MySNSTopic
+    Description: "SNS Topic ARN"
+
+  LambdaFunctionARN:
+    Value: !GetAtt MyLambdaFunction.Arn
+    Description: "Lambda Function ARN"
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Sns Basic
+Resources:
+  SNSTopic:
+  Type: AWS::SNS::Topic
+  
+    
