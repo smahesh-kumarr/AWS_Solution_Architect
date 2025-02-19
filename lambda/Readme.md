@@ -116,3 +116,53 @@ aws lambda list-layers
 - **AWS offers pre-built layers, and you can create custom ones.**
 
 🚀 **Start using Lambda Layers today to make your serverless applications more efficient!**
+
+
+# AWS Lambda - OS-Only Runtimes
+
+## Overview
+AWS Lambda provides OS-Only Runtimes for cases where a pre-installed programming language runtime is not available. These runtimes allow developers to bring their own runtime, compile binaries, or use third-party solutions.
+
+## When to Use OS-Only Runtimes
+There are three main scenarios where OS-Only Runtimes are beneficial:
+
+### 1. Native Ahead-of-Time (AOT) Compilation
+Languages that compile into an **executable binary** that does not require a dedicated language runtime.
+- **Supported Languages**: Go, Rust, C++, .NET Native AOT, Java GraalVM Native
+- **Requirements**:
+  - Include the AWS Lambda Runtime API interface in your binary.
+  - Compile the binary for Amazon Linux’s architecture.
+
+### 2. Third-Party Runtimes
+Some programming languages are **not natively supported** by AWS but have community-maintained runtimes.
+- **Examples**:
+  - Bref (for PHP)
+  - Swift AWS Lambda Runtime
+
+### 3. Custom Runtimes
+If AWS Lambda **does not provide a managed runtime** for a specific language or version, you can create your own.
+- **Use Cases**:
+  - Running newer versions of languages not yet supported by AWS.
+  - Running completely different languages like COBOL or Dart.
+- **Requirements**:
+  - Build a custom runtime that interacts with the AWS Lambda Runtime API.
+
+## Available OS-Only Runtimes
+AWS Lambda provides the following OS-Only Runtimes:
+
+| OS-Only Runtime   | Identifier     |
+|------------------|---------------|
+| Amazon Linux 2  | provided.al2  |
+| Amazon Linux 2023 | provided.al2023 |
+
+## Why Use OS-Only Runtimes?
+- ✅ **Flexibility** – Run any programming language, even if AWS doesn’t officially support it.
+- ✅ **Performance** – Precompiled binaries run faster than interpreted languages.
+- ✅ **Smaller Deployments** – Binaries take up less space than full runtimes.
+- ✅ **Customization** – Choose exactly which dependencies and libraries are included.
+
+## Conclusion
+AWS Lambda OS-Only Runtimes provide **full control** over the runtime environment, allowing developers to use precompiled binaries, third-party runtimes, or custom runtime implementations.
+
+---
+🚀 **Build your own runtime and extend AWS Lambda beyond its default limitations!**
