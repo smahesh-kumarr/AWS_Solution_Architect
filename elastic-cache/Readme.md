@@ -71,3 +71,5 @@ Memcached is a **simple, distributed caching system** that is great for **high-s
 ```sh
 sudo apt update
 sudo apt install redis-server
+sudo apt update
+sudo apt install memcached
