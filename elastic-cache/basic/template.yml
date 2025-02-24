@@ -1,0 +1,77 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template to create an EC2 instance inside a specific VPC and Subnet using Ubuntu AMI.
+
+Parameters:
+  ImageId:
+    Type: String
+    Default: ami-04cb4ca688797756f  # Ubuntu 22.04 LTS AMI (Update if needed)
+    Description: The ID of the Ubuntu AMI to use.
+
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    Description: EC2 instance type.
+
+  VPCId:
+    Type: String
+    Default: vpc-044d2a6f03d126f53
+    Description: The VPC ID where the instance will be launched.
+
+  SubnetId:
+    Type: String
+    Default: subnet-02c7e8e40cb84a2f1
+    Description: The Subnet ID where the instance will be launched.
+
+  SecurityGroupId:
+    Type: String
+    Default: sg-098fa834d80e2fc3c
+    Description: The Security Group ID.
+
+Resources:
+  SSMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ["ec2.amazonaws.com"]
+            Action: "sts:AssumeRole"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+
+  EC2InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref SSMRole
+
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref ImageId
+      InstanceType: !Ref InstanceType
+      SubnetId: !Ref SubnetId
+      SecurityGroupIds:
+        - !Ref SecurityGroupId
+      IamInstanceProfile: !Ref EC2InstanceProfile
+      UserData:
+        Fn::Base64: 
+          !Sub |
+            #!/bin/bash
+            sudo apt-get update -y
+            sudo apt-get install -y lsb-release curl gpg
+            curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+            sudo chmod 644 /usr/share/keyrings/redis-archive-keyring.gpg
+            echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+            sudo apt-get update -y
+            sudo apt-get install -y redis
+            sudo systemctl start redis
+            sudo systemctl enable redis
+            redis-server --version
+
+Outputs:
+  InstanceId:
+    Description: The ID of the created EC2 instance.
+    Value: !Ref MyEC2Instance
