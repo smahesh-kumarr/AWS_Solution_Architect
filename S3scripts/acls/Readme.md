@@ -30,9 +30,9 @@ aws s3api put-bucket-acl \
 
 ```sh
 touch bootcamp.txt
-aws s3 cp bootcamp.txt s3://--bucket my-bucket-23456789 
-aws s3 ls s3://--bucket my-bucket-23456789 
+aws s3 cp bootcamp.txt s3://my-bucket-23456789 
+aws s3 ls s3://my-bucket-23456789 
 
-aws s3 rm s3://--bucket my-bucket-23456789/bootcamp.txt
-aws s3 rb s3://--bucket my-bucket-23456789
+aws s3 rm s3://my-bucket-23456789/bootcamp.txt
+aws s3 rb s3://my-bucket-23456789
 
