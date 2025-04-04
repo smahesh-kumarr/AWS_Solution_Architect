@@ -45,7 +45,7 @@ Weighted Routing allows traffic to be distributed between multiple resources bas
 
 📌 Example: Route **70% traffic** to `EC2-1` and **30% traffic** to `EC2-2`.
 
-![Weighted Routing](./Weighted-Routing.png)
+![Weighted Routing](./Weighted-Routing-2.png)
 
 ---
 
