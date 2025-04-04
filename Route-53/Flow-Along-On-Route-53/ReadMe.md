@@ -2,8 +2,8 @@
 
 ## 📌 What is Route 53 Routing?
 AWS **Route 53** provides various routing policies to direct domain traffic efficiently based on specific conditions, such as **traffic distribution, location, and failover mechanisms**. Below are the primary routing types used in Route 53.
-
 ---
+![Networking structure](./Networking-Structure.png)
 
 ## 🛠 **Simple Routing**
 ### **Steps to Configure Simple Routing**
@@ -45,7 +45,7 @@ Weighted Routing allows traffic to be distributed between multiple resources bas
 
 📌 Example: Route **70% traffic** to `EC2-1` and **30% traffic** to `EC2-2`.
 
-![Weighted Routing](https://your-image-url.com/weighted-routing.png)
+![Weighted Routing](./Weighted-Routing.png)
 
 ---
 
@@ -61,7 +61,7 @@ Routes users based on their geographic location.
 2. **Create a Load Balancer** in each region.
 3. **Create Geolocation Records** in Route 53 to route based on the user's location.
 
-![Geolocation Routing](https://your-image-url.com/geolocation-routing.png)
+![Geolocation Routing](./Geolocation.png)
 
 ---
 
@@ -74,7 +74,7 @@ Failover Routing ensures high availability by redirecting traffic to a secondary
 3. **Configure Health Checks** in Route 53 to monitor the primary instance.
 4. **If the primary instance fails**, Route 53 automatically switches traffic to the secondary instance.
 
-![Failover Routing](https://your-image-url.com/failover-routing.png)
+![Failover Routing](./Failover.png)
 
 ---
 
