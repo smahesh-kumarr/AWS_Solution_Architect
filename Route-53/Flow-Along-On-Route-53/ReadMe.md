@@ -28,7 +28,7 @@ If multiple EC2 instances exist, use a **Load Balancer**:
 7. **Create an Application Load Balancer (ALB)** and attach the EC2 instances.
 8. **Create an A Record** in Route 53 that routes to the Load Balancer.
 
-![Simple Routing](https://your-image-url.com/simple-routing.png)
+![Simple Routing](./Simple-Routing.png)
 
 ---
 
